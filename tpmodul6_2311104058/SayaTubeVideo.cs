@@ -14,8 +14,8 @@ namespace tpmodul6_2311104058
 
         public SayaTubeVideo(string title)
         {
-            if (string.IsNullOrEmpty(title))
-                throw new ArgumentException("Title cannot be null or empty");
+            if (string.IsNullOrEmpty(title) || title.Length > 100)
+                throw new ArgumentException("Title cannot be null, empty, or exceed 100 characters");
 
             Random rand = new Random();
             this.id = rand.Next(10000, 99999);
@@ -25,10 +25,20 @@ namespace tpmodul6_2311104058
 
         public void IncreasePlayCount(int count)
         {
-            if (count < 0)
-                throw new ArgumentException("Play count increment cannot be negative");
+            if (count < 0 || count > 10000000)
+                throw new ArgumentException("Play count increment must be between 0 and 10,000,000");
 
-            playCount += count;
+            try
+            {
+                checked
+                {
+                    playCount += count;
+                }
+            }
+            catch (OverflowException)
+            {
+                Console.WriteLine("Error: Play count overflow detected!");
+            }
         }
 
         public void PrintVideoDetails()
@@ -39,5 +49,6 @@ namespace tpmodul6_2311104058
             Console.WriteLine($"Play Count: {playCount}");
         }
     }
+
 
 }
