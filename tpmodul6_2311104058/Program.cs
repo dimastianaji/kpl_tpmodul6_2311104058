@@ -1,2 +1,11 @@
-﻿// See https://aka.ms/new-console-template for more information
-Console.WriteLine("Hello, World!");
+﻿using tpmodul6_2311104058;
+
+class Program
+{
+    static void Main()
+    {
+        SayaTubeVideo video = new SayaTubeVideo("Tutorial Design By Contract – Dimastian Aji Wibowo");
+        video.IncreasePlayCount(100);
+        video.PrintVideoDetails();
+    }
+}
